@@ -1,0 +1,187 @@
+{
+  "info": {
+    "_postman_id": "construction-api",
+    "name": "Construction Planning API",
+    "description": "API endpoints for Construction Planning Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Utilities",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/health",
+              "host": ["{{base_url}}"],
+              "path": ["api", "health"]
+            }
+          }
+        },
+        {
+          "name": "Get Default Configuration",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/default-config",
+              "host": ["{{base_url}}"],
+              "path": ["api", "default-config"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{user_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projectName\": \"Residential Complex A\",\n  \"builtUpArea\": 1500,\n  \"numberOfFloors\": 4,\n  \"projectTimeline\": 52\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"]
+            }
+          }
+        },
+        {
+          "name": "Get All Projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-id",
+                "value": "{{user_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects"]
+            }
+          }
+        },
+        {
+          "name": "Get Project Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "x-user-id",
+                "value": "{{user_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Project Configuration",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{user_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"masonWage\": 850,\n  \"laborWage\": 650,\n  \"electricianWage\": 1050,\n  \"cementRate\": 420\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/config",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "config"]
+            }
+          }
+        },
+        {
+          "name": "Calculate Timeline Compression",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-user-id",
+                "value": "{{user_id}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newTimeline\": 36\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}/timeline-compression",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}", "timeline-compression"]
+            }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "x-user-id",
+                "value": "{{user_id}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/projects/{{project_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projects", "{{project_id}}"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3001",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "test-user-123",
+      "type": "string"
+    },
+    {
+      "key": "project_id",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
